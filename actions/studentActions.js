@@ -3,7 +3,8 @@
 import { connectDB } from "@/lib/db";
 import Student from "@/models/Student";
 
-// ➤ Add Student
+import { revalidatePath } from "next/cache";
+
 export async function addStudent(formData) {
   try {
     await connectDB();
@@ -12,19 +13,17 @@ export async function addStudent(formData) {
     const studentClass = formData.get("class");
     const dob = formData.get("dob");
 
-    if (!name || !studentClass || !dob) {
-      throw new Error("All fields are required");
-    }
-
     await Student.create({
       name,
       class: studentClass,
       dob: new Date(dob),
     });
 
+    // 🔥 THIS IS IMPORTANT
+    revalidatePath("/");
+
     return { success: true };
   } catch (error) {
-    console.error(error);
     return { success: false, message: error.message };
   }
 }
