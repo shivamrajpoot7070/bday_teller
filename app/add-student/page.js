@@ -11,27 +11,35 @@ export default function AddStudent() {
   const [toast, setToast] = useState(null);
 
   async function handleSubmit(formData) {
+    // 🚫 prevent double submit
+    if (loading) return;
+
     setLoading(true);
     setToast(null);
 
     const res = await addStudent(formData);
 
-    setLoading(false);
-
     if (res.success) {
       setToast({ type: "success", message: "🎉 Birthday Added!" });
 
-      // redirect after small delay (so user sees toast)
       setTimeout(() => {
         router.push("/");
       }, 1500);
     } else {
       setToast({ type: "error", message: res.message });
+      setLoading(false);
     }
   }
 
   return (
     <div className="form-container">
+
+      {/* 🔥 FULL SCREEN LOADER */}
+      {loading && (
+        <div className="loader-overlay">
+          <div className="spinner"></div>
+        </div>
+      )}
 
       {/* Toast */}
       {toast && (
@@ -49,6 +57,7 @@ export default function AddStudent() {
             name="name"
             placeholder="Name"
             className="input"
+            disabled={loading}
             required
           />
 
@@ -57,6 +66,7 @@ export default function AddStudent() {
             name="class"
             placeholder="Class"
             className="input"
+            disabled={loading}
             required
           />
 
@@ -64,6 +74,7 @@ export default function AddStudent() {
             type="date"
             name="dob"
             className="input"
+            disabled={loading}
             required
           />
 
