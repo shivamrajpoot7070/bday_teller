@@ -35,17 +35,27 @@ export async function getTodaysBirthdays() {
     await connectDB();
 
     const today = new Date();
-    const day = today.getDate();
-    const month = today.getMonth(); // 0-based
 
-    const students = await Student.find();
+    const day = today.getUTCDate();
+    const month = today.getUTCMonth() + 1;
 
-    const todaysBirthdays = students.filter((student) => {
-      const dob = new Date(student.dob);
-      return dob.getDate() === day && dob.getMonth() === month;
-    });
+    const students = await Student.aggregate([
+      {
+        $addFields: {
+          day: { $dayOfMonth: "$dob" },
+          month: { $month: "$dob" },
+        },
+      },
+      {
+        $match: {
+          day: day,
+          month: month,
+        },
+      },
+    ]);
+    console.log(students);
 
-    return todaysBirthdays;
+    return students;
   } catch (error) {
     console.error(error);
     return [];
