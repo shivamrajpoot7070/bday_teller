@@ -49,7 +49,7 @@ export default function AddStudent() {
 
       <div className="form-box">
 
-        {/* 🔙 Back Button */}
+        {/* 🔙 Back */}
         <button
           onClick={() => router.push("/")}
           className="back-btn"
@@ -61,6 +61,8 @@ export default function AddStudent() {
         <h1>🎂 Add Student</h1>
 
         <form action={handleSubmit}>
+
+          {/* Name */}
           <input
             type="text"
             name="name"
@@ -70,15 +72,41 @@ export default function AddStudent() {
             required
           />
 
-          <input
-            type="text"
+          {/* 🔥 Class Dropdown */}
+          <select
             name="class"
-            placeholder="Class"
             className="input"
             disabled={loading}
             required
+          >
+            <option value="">Select Class</option>
+            <option value="PG">PG</option>
+            <option value="Nursery">Nursery</option>
+            <option value="LKG">LKG</option>
+            <option value="UKG">UKG</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
+
+          {/* 🔥 Section (optional) */}
+          <input
+            type="text"
+            name="section"
+            placeholder="Section (A, B, C - optional)"
+            className="input"
+            disabled={loading}
+            maxLength={2}
           />
 
+          {/* Father Name */}
           <input
             type="text"
             name="fatherName"
@@ -87,6 +115,7 @@ export default function AddStudent() {
             disabled={loading}
           />
 
+          {/* DOB */}
           <input
             type="date"
             name="dob"
@@ -95,6 +124,7 @@ export default function AddStudent() {
             required
           />
 
+          {/* Submit */}
           <button
             type="submit"
             className="btn"
