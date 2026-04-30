@@ -5,43 +5,57 @@ export default async function Home() {
   const students = await getTodaysBirthdays();
 
   return (
-    <div>
+    <div className="home-page">
 
-      {/* Moving Header */}
+      {/* 🔥 Header */}
       <div className="marquee">
         <h1>🎉 Birthday Dashboard 🎂 Birthday Dashboard 🎉</h1>
       </div>
 
+      {/* 📦 Main Layout */}
       <div className="container">
 
-        {/* Left: Birthdays */}
-        <div className="card">
-          <h2>Today's Birthdays</h2>
+        {/* 🎂 LEFT SIDE */}
+        <div className="card left-card">
+          <h2 className="section-title">🎂 Today's Birthdays</h2>
 
           {students.length === 0 ? (
-            <p>No birthdays today 🎈</p>
+            <p className="empty">No birthdays today 🎈</p>
           ) : (
-            students.map((s, i) => (
-              <div key={s._id} className="bday-item">
-                <h3 className={`name${(i % 3) + 1}`}>{s.name}</h3>
-                <p className={`class${(i % 2) + 1}`}>
-                  Class: {s.class}
-                </p>
-              </div>
-            ))
+            <div className="bday-list">
+              {students.map((s, i) => (
+                <div key={s._id} className="bday-item">
+                  <h3 className={`name${(i % 3) + 1}`}>{s.name}</h3>
+                  <p className={`class${(i % 2) + 1}`}>
+                    Class {s.class}
+                  </p>
+                </div>
+              ))}
+            </div>
           )}
         </div>
 
-        {/* Right: Add Student */}
-        <div className="card" style={{ textAlign: "center" }}>
-          <h2>Add Student</h2>
-          <p>Quickly add birthdays 🎂</p>
+        {/* ➕ RIGHT SIDE */}
+        <div className="card right-card">
 
-          <br />
+          <h2 className="section-title">⚡ Quick Actions</h2>
 
-          <Link href="/add-student" className="btn">
-            ➕ Add Student
-          </Link>
+          <p className="subtitle">
+            Manage students and birthdays easily
+          </p>
+
+          <div className="actions">
+
+            <Link href="/add-student" className="btn">
+              ➕ Add Student
+            </Link>
+
+            <Link href="/students" className="btn secondary">
+              📚 View All Students
+            </Link>
+
+          </div>
+
         </div>
 
       </div>

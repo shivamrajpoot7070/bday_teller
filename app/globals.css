@@ -191,3 +191,159 @@ body {
     transform: rotate(360deg);
   }
 }
+
+.students-page {
+  padding: 20px;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+/* Buttons */
+.class-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.class-btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #ddd;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.class-btn:hover {
+  background: #bbb;
+}
+
+.class-btn.active {
+  background: linear-gradient(45deg, #ff6ec4, #7873f5);
+  color: white;
+}
+
+/* Grid */
+.student-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+}
+
+/* Card */
+.student-card {
+  background: rgba(255,255,255,0.7);
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  transition: 0.3s;
+}
+
+.student-card:hover {
+  transform: translateY(-5px);
+}
+
+.student-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.loading,
+.empty {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.back-btn {
+  display: inline-block;
+  padding: 8px 14px;
+  background: linear-gradient(45deg, #ff6ec4, #7873f5);
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.back-btn:hover {
+  transform: scale(1.05);
+}
+
+.back-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
+.home-page {
+  padding: 20px;
+}
+
+/* Section titles */
+.section-title {
+  margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.subtitle {
+  margin-bottom: 20px;
+  color: #555;
+}
+
+/* Layout spacing */
+.container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+/* Cards */
+.left-card {
+  min-height: 300px;
+}
+
+.right-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Birthday list spacing */
+.bday-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Secondary button */
+.btn.secondary {
+  background: linear-gradient(45deg, #36d1dc, #5b86e5);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+
+  .right-card {
+    margin-top: 20px;
+  }
+}

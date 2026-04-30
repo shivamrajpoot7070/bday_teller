@@ -13,17 +13,22 @@ export async function addStudent(formData) {
     const studentClass = formData.get("class");
     const dob = formData.get("dob");
 
-    await Student.create({
-      name,
-      class: studentClass,
-      dob: new Date(dob),
-    });
+
+  const fatherName = formData.get("fatherName");
+
+await Student.create({
+  name,
+  class: studentClass,
+  dob: new Date(dob),
+  fatherName: fatherName || "", // ✅ fallback
+});
 
     // 🔥 THIS IS IMPORTANT
     revalidatePath("/");
 
     return { success: true };
-  } catch (error) {
+  } 
+  catch (error) {
     return { success: false, message: error.message };
   }
 }
@@ -58,5 +63,32 @@ export async function getTodaysBirthdays() {
   } catch (error) {
     console.error(error);
     return [];
+  }
+}
+
+
+export async function getStudentsByClass() {
+  try {
+    await connectDB();
+
+    const students = await Student.find().sort({ class: 1 });
+
+    // Group by class
+    const grouped = {};
+
+    students.forEach((student) => {
+      const cls = student.class;
+
+      if (!grouped[cls]) {
+        grouped[cls] = [];
+      }
+
+      grouped[cls].push(student);
+    });
+
+    return grouped;
+  } catch (error) {
+    console.error(error);
+    return {};
   }
 }

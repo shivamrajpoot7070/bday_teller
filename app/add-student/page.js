@@ -11,7 +11,6 @@ export default function AddStudent() {
   const [toast, setToast] = useState(null);
 
   async function handleSubmit(formData) {
-    // 🚫 prevent double submit
     if (loading) return;
 
     setLoading(true);
@@ -34,7 +33,7 @@ export default function AddStudent() {
   return (
     <div className="form-container">
 
-      {/* 🔥 FULL SCREEN LOADER */}
+      {/* Loader */}
       {loading && (
         <div className="loader-overlay">
           <div className="spinner"></div>
@@ -49,6 +48,16 @@ export default function AddStudent() {
       )}
 
       <div className="form-box">
+
+        {/* 🔙 Back Button */}
+        <button
+          onClick={() => router.push("/")}
+          className="back-btn"
+          disabled={loading}
+        >
+          ← Back
+        </button>
+
         <h1>🎂 Add Student</h1>
 
         <form action={handleSubmit}>
@@ -68,6 +77,14 @@ export default function AddStudent() {
             className="input"
             disabled={loading}
             required
+          />
+
+          <input
+            type="text"
+            name="fatherName"
+            placeholder="Father Name (optional)"
+            className="input"
+            disabled={loading}
           />
 
           <input
